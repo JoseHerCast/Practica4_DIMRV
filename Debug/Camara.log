@@ -1,0 +1,32 @@
+﻿  main.cpp
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\main.cpp(84,44): warning C4305: 'inicializando': truncamiento de 'double' a 'GLfloat'
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\main.cpp(85,44): warning C4305: 'inicializando': truncamiento de 'double' a 'GLfloat'
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\main.cpp(86,46): warning C4305: 'inicializando': truncamiento de 'double' a 'GLfloat'
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\main.cpp(87,26): warning C4305: 'inicializando': truncamiento de 'double' a 'GLfloat'
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\main.cpp(89,47): warning C4305: 'inicializando': truncamiento de 'double' a 'GLfloat'
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\main.cpp(90,45): warning C4305: 'inicializando': truncamiento de 'double' a 'GLfloat'
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\main.cpp(91,49): warning C4305: 'inicializando': truncamiento de 'double' a 'GLfloat'
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\main.cpp(92,27): warning C4305: 'inicializando': truncamiento de 'double' a 'GLfloat'
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\main.cpp(94,46): warning C4305: 'inicializando': truncamiento de 'double' a 'GLfloat'
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\main.cpp(95,46): warning C4305: 'inicializando': truncamiento de 'double' a 'GLfloat'
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\main.cpp(96,49): warning C4305: 'inicializando': truncamiento de 'double' a 'GLfloat'
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\main.cpp(97,27): warning C4305: 'inicializando': truncamiento de 'double' a 'GLfloat'
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\main.cpp(305,30): warning C4244: 'argumento': conversión de 'GLdouble' a 'GLfloat'; posible pérdida de datos
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\main.cpp(305,24): warning C4244: 'argumento': conversión de 'GLdouble' a 'GLfloat'; posible pérdida de datos
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\main.cpp(305,18): warning C4244: 'argumento': conversión de 'GLdouble' a 'GLfloat'; posible pérdida de datos
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\main.cpp(306,37): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\main.cpp(349,24): warning C4244: 'argumento': conversión de 'GLfloat' a 'GLint'; posible pérdida de datos
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\main.cpp(349,18): warning C4244: 'argumento': conversión de 'GLfloat' a 'GLint'; posible pérdida de datos
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\main.cpp(405,40): warning C4305: '-=': truncamiento de 'double' a 'GLfloat'
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\main.cpp(407,40): warning C4305: '+=': truncamiento de 'double' a 'GLfloat'
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\main.cpp(432,65): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\main.cpp(435,36): warning C4805: '==': combinación no segura del tipo 'GLboolean' y el tipo 'bool' en la operación
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\main.cpp(468,62): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\main.cpp(470,36): warning C4805: '==': combinación no segura del tipo 'GLboolean' y el tipo 'bool' en la operación
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\main.cpp(504,66): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\main.cpp(506,64): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\main.cpp(508,36): warning C4805: '==': combinación no segura del tipo 'GLboolean' y el tipo 'bool' en la operación
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\main.cpp(542,69): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\main.cpp(544,67): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\main.cpp(547,36): warning C4805: '==': combinación no segura del tipo 'GLboolean' y el tipo 'bool' en la operación
+  Camara.vcxproj -> D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Debug\Camara.exe
