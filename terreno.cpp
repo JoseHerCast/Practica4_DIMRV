@@ -2,6 +2,9 @@
 
 void Terrain::generateMesh(GLuint width,GLuint depth)
 {
+    double inc = 1;
+    this->width = width;
+    this->depth = depth;
     int i, j,count;
     int aux[4];
   
@@ -11,11 +14,17 @@ void Terrain::generateMesh(GLuint width,GLuint depth)
     for (i = 0; i < depth;i++) {
         for (j = 0; j < width; j++) {
             v.x = (float(i) / (width - 1) * 2.0f - 1.0);
-            v.y = rand() % 11;
+            if (i > depth / 2 )
+                v.y = inc;
+            else
+                v.y = 0;
+
             v.z = (float(j) / (depth - 1) * 2.0f - 1.0);
             this->vertices.push_back(v);
             printf("\n( %lf, %lf)\n",v.x,v.z);
         }
+        if (i > depth/2)
+            inc++;
     }
     printf("\nNúmero de vertices %d\n",vertices.size());
 
@@ -47,7 +56,7 @@ void Terrain::generateMesh(GLuint width,GLuint depth)
         }
     }
     
-    printf("\nNúmero de caras %d\n", caras.size());
+    //printf("\nNúmero de caras %d\n", caras.size());
 }
 void Terrain::solidDraw(GLfloat* ambient, GLfloat* diffuse, GLfloat* specular, GLfloat shininess)
 {
@@ -121,4 +130,12 @@ void Terrain::wireDraw()
         glVertex3f(v3.x, v3.y, v3.z);
     }
     glEnd();
+}
+GLfloat Terrain::getHeight(GLfloat x, GLfloat z) {
+    for (int i = 0; i < depth;i++) {
+        for (int j = 0; j < width; j++) {
+
+        }
+    }
+    return 0;
 }

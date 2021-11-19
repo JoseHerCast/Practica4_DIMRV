@@ -29,4 +29,47 @@ D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\main.cpp(508
 D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\main.cpp(542,69): warning C4305: 'argumento': truncamiento de 'double' a 'float'
 D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\main.cpp(544,67): warning C4305: 'argumento': truncamiento de 'double' a 'float'
 D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\main.cpp(547,36): warning C4805: '==': combinación no segura del tipo 'GLboolean' y el tipo 'bool' en la operación
+  terreno.cpp
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(14,19): warning C4018: '<': no coinciden signed/unsigned
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(15,23): warning C4018: '<': no coinciden signed/unsigned
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(17,19): warning C4018: '>': no coinciden signed/unsigned
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(26,15): warning C4018: '>': no coinciden signed/unsigned
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(31,19): warning C4018: '<': no coinciden signed/unsigned
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(32,23): warning C4018: '<': no coinciden signed/unsigned
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(8,14): warning C4101: 'count': variable local sin referencia
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(73,23): warning C4018: '<': no coinciden signed/unsigned
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(95,34): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(96,33): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(97,33): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(103,34): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(103,28): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(103,22): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(104,34): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(104,28): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(104,22): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(105,34): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(105,28): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(105,22): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(114,23): warning C4018: '<': no coinciden signed/unsigned
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(123,34): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(123,28): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(123,22): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(124,34): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(124,28): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(124,22): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(126,34): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(126,28): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(126,22): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(127,34): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(127,28): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(127,22): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(129,34): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(129,28): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(129,22): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(130,34): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(130,28): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(130,22): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(135,23): warning C4018: '<': no coinciden signed/unsigned
+D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Camara\terreno.cpp(136,27): warning C4018: '<': no coinciden signed/unsigned
+  Generando código...
   Camara.vcxproj -> D:\Users\carro\Desktop\Proyectos_DIMRV\SDL_Prácticas\Camara\Debug\Camara.exe

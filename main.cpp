@@ -350,7 +350,6 @@ void picking_pipeline() {
 
     gluUnProject(winX, winY, winZ, modelview, projection, viewport, &relX, &relY, &relZ);
 
-
     //////////////////////////////////////////////////////////////////////////////
 
     //Ahora hay que calcular la posición en el mundo real del objeto
@@ -382,6 +381,7 @@ void processInput() {
                     relX,
                     relY,
                     relZ);
+
             }
             break;
         case SDL_MOUSEBUTTONUP:
@@ -405,12 +405,12 @@ void processInput() {
                     g_lookupdown -= 1.3;
                 else if (currentY > (lastY))
                     g_lookupdown += 1.3;
+                //printf("Mouse coordinates: (%d,%d)\nWindow size: %d W %d H\n\n",
+                //    currentX,
+                //    currentY,
+                //    screenW,
+                //    screenH);
 
-                /*printf("Mouse coordinates: (%d,%d)\nWindow size: %d W %d H\n\n",
-                    currentX,
-                    currentY,
-                    screenW,
-                    screenH);*/
             }
             break;
         //Todo lo relacionado con presionar alguna tecla
@@ -419,7 +419,7 @@ void processInput() {
             //Manejo de teclas alfabéticas
             case 'a':
             case 'A':
-                
+
                 if (objCamera.mPos.x > scale[0] || objCamera.mPos.x<(-scale[0]) ||
                     objCamera.mPos.z>scale[2] || objCamera.mPos.z < (-scale[2])) {
                     printf("\nCoordenadas de cámara: %f,%f", objCamera.mPos.x, objCamera.mPos.z);
@@ -604,7 +604,7 @@ int main(int argc, char **argv)
     initGL();
 
     cargaModelos();
-    terreno.generateMesh(15,15);
+    terreno.generateMesh(100,100);
 
     sdlMainLoop();
 

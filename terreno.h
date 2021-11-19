@@ -21,10 +21,14 @@ class Terrain
     std::vector<vertex> normales;
     std::vector<face> caras;
 
+    GLuint width;
+    GLuint depth;
+
 public:
     //Función de lectura del archivo
     void generateMesh(GLuint width,GLuint depth);
     //Función de dibujo del modelo
     void solidDraw(GLfloat* ambient, GLfloat* diffuse, GLfloat* specular, GLfloat shininess);
     void wireDraw();
+    GLfloat getHeight(GLfloat x, GLfloat z);
 };
