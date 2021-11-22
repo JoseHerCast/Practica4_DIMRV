@@ -23,6 +23,7 @@ class Terrain
 
     GLuint width;
     GLuint depth;
+    GLdouble maxHeight;
 
 public:
     //Función de lectura del archivo
@@ -30,5 +31,6 @@ public:
     //Función de dibujo del modelo
     void solidDraw(GLfloat* ambient, GLfloat* diffuse, GLfloat* specular, GLfloat shininess);
     void wireDraw();
-    GLfloat getHeight(GLfloat x, GLfloat z);
+    GLfloat getHeight();
+    GLuint* getNormal();
 };

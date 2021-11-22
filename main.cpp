@@ -46,10 +46,16 @@ int screenH = 0;
 
 int currentX=0, lastX=0;
 int currentY=0, lastY=0;
+//Escala de nuestro terreno
 GLfloat scale[3] = { 100,1,100 };
+//Bandera que ayuda a restirngir la camara a dentro del terreno
 GLboolean outside = false;
+//Pendiente de la recta para determinar la altura de la posición de la camara
+GLfloat m;
+bool vistaAerea = false;
 
 CCamera objCamera;	//Create objet Camera
+CCamera freeCamera;
 
 obj3dmodel corvette;
 obj3dmodel goku;
@@ -70,13 +76,14 @@ GLdouble relX, relY, relZ;
 GLfloat pos[3];
 
 GLfloat g_lookupdown = 0.0f;    // Look Position In The Z-Axis (NEW)
+GLfloat g_lookupdown2 = 0.0f;
 
 CTexture t_sky; //Skybox
 CTexture t_sky2; //Skybox
 
 CFiguras sky_cube;
 
-GLfloat l_pos[3] = {1000,1000,1000};
+GLfloat l_pos[3] = {1000,500,0};
 GLfloat l_ambient[3] = {1.0,1.0,1.0};
 GLfloat l_diffuse[3] = { 1.0,1.0,1.0 };
 GLfloat l_specular[3] = { 1.0,1.0,1.0 };
@@ -94,7 +101,7 @@ GLfloat w_shininess = 20.8;
 GLfloat g_ambient[3] = { 0.01175,0.3745, 0.1 };
 GLfloat g_diffuse[3] = { 0.04136,0.61424,0.1 };
 GLfloat g_specular[3] = { 0.226959,0.727811,0.1 };
-GLfloat g_shininess = 20.8;
+GLfloat g_shininess = 76;
 
 GLfloat ambient[3] = {0.5,0.5,0.5};
 
@@ -205,7 +212,8 @@ void initGL(void)     // Inicializamos parametros
 
     Texture_Load();
 
-    objCamera.Position_Camera(6, 2.5f, 3, 10, 2.5f, 0, 0, 1, 0);
+    objCamera.Position_Camera(-6, 2.5f, 3, 10, 2.5f, 0, 0, 1, 0);
+    freeCamera.Position_Camera(-6, 2.5f, 3, 10, 2.5f, 0, 0, 1, 0);
 
     GLint redBits, greenBits, blueBits; 
     glGetIntegerv(GL_RED_BITS, &redBits); 
@@ -223,12 +231,20 @@ void sdlDisplay() {
     CFiguras ejemplo;
 
 
-    glRotatef(g_lookupdown, 1.0f, 0, 0);
+    if (vistaAerea == true) {
+        glRotatef(g_lookupdown2, 1.0f, 0, 0);
 
-    gluLookAt(objCamera.mPos.x, objCamera.mPos.y, objCamera.mPos.z,
-        objCamera.mView.x, objCamera.mView.y, objCamera.mView.z,
-        objCamera.mUp.x, objCamera.mUp.y, objCamera.mUp.z);
+        gluLookAt(freeCamera.mPos.x, freeCamera.mPos.y, freeCamera.mPos.z,
+            freeCamera.mView.x, freeCamera.mView.y, freeCamera.mView.z,
+            freeCamera.mUp.x, freeCamera.mUp.y, freeCamera.mUp.z);
+    }
+    else {
+        glRotatef(g_lookupdown, 1.0f, 0, 0);
 
+        gluLookAt(objCamera.mPos.x, objCamera.mPos.y, objCamera.mPos.z,
+            objCamera.mView.x, objCamera.mView.y, objCamera.mView.z,
+            objCamera.mUp.x, objCamera.mUp.y, objCamera.mUp.z);
+    }
     glPushMatrix(); //Se pinta el cielo
     glDisable(GL_LIGHTING);
         sky_cube.skybox(10000.0, 5000.0, 5000.0, t_sky.GLindex);
@@ -396,15 +412,28 @@ void processInput() {
                 currentX = evnt.motion.x;
                 currentY = evnt.motion.y;
 
-                if (currentX < (lastX))
-                    objCamera.Rotate_View(-CAMERASPEED);
-                else if (currentX > (lastX))
-                    objCamera.Rotate_View(CAMERASPEED);
+                if (vistaAerea == true) {
+                    if (currentX < (lastX))
+                        freeCamera.Rotate_View(-CAMERASPEED);
+                    else if (currentX > (lastX))
+                        freeCamera.Rotate_View(CAMERASPEED);
 
-                if (currentY < (lastY))
-                    g_lookupdown -= 1.3;
-                else if (currentY > (lastY))
-                    g_lookupdown += 1.3;
+                    if (currentY < (lastY))
+                        g_lookupdown2 -= 1.3;
+                    else if (currentY > (lastY))
+                        g_lookupdown2 += 1.3;
+                }
+                else {
+                    if (currentX < (lastX))
+                        objCamera.Rotate_View(-CAMERASPEED);
+                    else if (currentX > (lastX))
+                        objCamera.Rotate_View(CAMERASPEED);
+
+                    if (currentY < (lastY))
+                        g_lookupdown -= 1.3;
+                    else if (currentY > (lastY))
+                        g_lookupdown += 1.3;
+                }
                 //printf("Mouse coordinates: (%d,%d)\nWindow size: %d W %d H\n\n",
                 //    currentX,
                 //    currentY,
@@ -420,154 +449,219 @@ void processInput() {
             case 'a':
             case 'A':
 
-                if (objCamera.mPos.x > scale[0] || objCamera.mPos.x<(-scale[0]) ||
-                    objCamera.mPos.z>scale[2] || objCamera.mPos.z < (-scale[2])) {
-                    printf("\nCoordenadas de cámara: %f,%f", objCamera.mPos.x, objCamera.mPos.z);
-                    printf("\nMáximos XZ: ( %f,%f )\n", scale[0], scale[2]);
-                    printf("\nMinimos XZ: ( %f,%f )\n", -scale[0], -scale[2]);
-                    outside = true;
+                if (vistaAerea == true) {
+                    freeCamera.Strafe_Camera(-(CAMERASPEED + 0.1));
                 }
                 else {
-                    outside = false;
-                    objCamera.Strafe_Camera(-(CAMERASPEED + 0.1));
-                }
-
-                if (outside == true) {
-                    if (objCamera.mPos.x > scale[0] && objCamera.mPos.z<scale[2] && objCamera.mPos.z >(-scale[2])) {
-                        objCamera.mPos.x -= 1;
-                        objCamera.mView.x -= 1;
+                    if (objCamera.mPos.x > scale[0] || objCamera.mPos.x<(-scale[0]) ||
+                        objCamera.mPos.z>scale[2] || objCamera.mPos.z < (-scale[2])) {
+                        printf("\nCoordenadas de cámara: %f,%f", objCamera.mPos.x, objCamera.mPos.z);
+                        printf("\nMáximos XZ: ( %f,%f )\n", scale[0], scale[2]);
+                        printf("\nMinimos XZ: ( %f,%f )\n", -scale[0], -scale[2]);
+                        outside = true;
                     }
-                    else if (objCamera.mPos.x < (-scale[0]) && objCamera.mPos.z<scale[2] && objCamera.mPos.z >(-scale[2])) {
-                        objCamera.mPos.x += 1;
-                        objCamera.mView.x += 1;
-
+                    else {
+                        outside = false;
+                        objCamera.Strafe_Camera(-(CAMERASPEED + 0.1));
+                        //Si estamos sobre el plano inclinado
+                        if (objCamera.mPos.x >= 0) {
+                            //Calculamos el valor de y acorde a la ecuación de la recta y la pendiente obtenida
+                            objCamera.mPos.y = objCamera.mPos.x * m;
+                            objCamera.mView.y = (objCamera.mPos.x + 10) * m;
+                        }
+                        else {
+                            objCamera.mPos.y = 2.5;
+                            objCamera.mView.y = (objCamera.mPos.x + 10) * (2.5 / scale[0]);
+                        }
                     }
-                    else if (objCamera.mPos.z > scale[2] && objCamera.mPos.x > -scale[0] && objCamera.mPos.x < scale[0]) {
-                        objCamera.mPos.z -= 1;
-                        objCamera.mView.z -= 1;
 
-                    }
-                    else if (objCamera.mPos.z < (-scale[2]) && objCamera.mPos.x > -scale[0] && objCamera.mPos.x < scale[0]) {
-                        objCamera.mPos.z += 1;
-                        objCamera.mView.z += 1;
+                    if (outside == true) {
+                        if (objCamera.mPos.x > scale[0] && objCamera.mPos.z<scale[2] && objCamera.mPos.z >(-scale[2])) {
+                            objCamera.mPos.x -= 1;
+                            objCamera.mView.x -= 1;
+                        }
+                        else if (objCamera.mPos.x < (-scale[0]) && objCamera.mPos.z<scale[2] && objCamera.mPos.z >(-scale[2])) {
+                            objCamera.mPos.x += 1;
+                            objCamera.mView.x += 1;
 
+                        }
+                        else if (objCamera.mPos.z > scale[2] && objCamera.mPos.x > -scale[0] && objCamera.mPos.x < scale[0]) {
+                            objCamera.mPos.z -= 1;
+                            objCamera.mView.z -= 1;
+
+                        }
+                        else if (objCamera.mPos.z < (-scale[2]) && objCamera.mPos.x > -scale[0] && objCamera.mPos.x < scale[0]) {
+                            objCamera.mPos.z += 1;
+                            objCamera.mView.z += 1;
+
+                        }
                     }
                 }
                 break;
             case 'd':
             case 'D':
-                if (objCamera.mPos.x > scale[0] || objCamera.mPos.x<(-scale[0]) ||
-                    objCamera.mPos.z>scale[2] || objCamera.mPos.z < (-scale[2])) {
-                    printf("\nCoordenadas de cámara: %f,%f", objCamera.mPos.x, objCamera.mPos.z);
-                    printf("\nMáximos XZ: ( %f,%f )\n", scale[0], scale[2]);
-                    printf("\nMinimos XZ: ( %f,%f )\n", -scale[0], -scale[2]);
-                    outside = true;
+                if (vistaAerea == true) {
+                    freeCamera.Strafe_Camera(CAMERASPEED + 0.1);
                 }
                 else {
-                    outside = false;
-                    objCamera.Strafe_Camera(CAMERASPEED + 0.1);
-                }
-                if (outside == true) {
-                    if (objCamera.mPos.x > scale[0] && objCamera.mPos.z<scale[2] && objCamera.mPos.z >(-scale[2])) {
-                        objCamera.mPos.x -= 1;
-                        objCamera.mView.x -= 1;
+                    if (objCamera.mPos.x > scale[0] || objCamera.mPos.x<(-scale[0]) ||
+                        objCamera.mPos.z>scale[2] || objCamera.mPos.z < (-scale[2])) {
+                        printf("\nCoordenadas de cámara: %f,%f", objCamera.mPos.x, objCamera.mPos.z);
+                        printf("\nMáximos XZ: ( %f,%f )\n", scale[0], scale[2]);
+                        printf("\nMinimos XZ: ( %f,%f )\n", -scale[0], -scale[2]);
+                        outside = true;
                     }
-                    else if (objCamera.mPos.x < (-scale[0]) && objCamera.mPos.z<scale[2] && objCamera.mPos.z >(-scale[2])) {
-                        objCamera.mPos.x += 1;
-                        objCamera.mView.x += 1;
-
+                    else {
+                        outside = false;
+                        objCamera.Strafe_Camera(CAMERASPEED + 0.1);
+                        //Si estamos sobre el plano inclinado
+                        if (objCamera.mPos.x >= 0) {
+                            //Calculamos el valor de y acorde a la ecuación de la recta y la pendiente obtenida
+                            objCamera.mPos.y = objCamera.mPos.x * m;
+                            objCamera.mView.y = (objCamera.mPos.x + 10) * m;
+                        }
+                        else {
+                            objCamera.mPos.y = 2.5;
+                            objCamera.mView.y = (objCamera.mPos.x + 10) * (2.5 / scale[0]);
+                        }
                     }
-                    else if (objCamera.mPos.z > scale[2] && objCamera.mPos.x > -scale[0] && objCamera.mPos.x < scale[0]) {
-                        objCamera.mPos.z -= 1;
-                        objCamera.mView.z -= 1;
+                    if (outside == true) {
+                        if (objCamera.mPos.x > scale[0] && objCamera.mPos.z<scale[2] && objCamera.mPos.z >(-scale[2])) {
+                            objCamera.mPos.x -= 1;
+                            objCamera.mView.x -= 1;
+                        }
+                        else if (objCamera.mPos.x < (-scale[0]) && objCamera.mPos.z<scale[2] && objCamera.mPos.z >(-scale[2])) {
+                            objCamera.mPos.x += 1;
+                            objCamera.mView.x += 1;
 
-                    }
-                    else if (objCamera.mPos.z < (-scale[2]) && objCamera.mPos.x > -scale[0] && objCamera.mPos.x < scale[0]) {
-                        objCamera.mPos.z += 1;
-                        objCamera.mView.z += 1;
+                        }
+                        else if (objCamera.mPos.z > scale[2] && objCamera.mPos.x > -scale[0] && objCamera.mPos.x < scale[0]) {
+                            objCamera.mPos.z -= 1;
+                            objCamera.mView.z -= 1;
 
+                        }
+                        else if (objCamera.mPos.z < (-scale[2]) && objCamera.mPos.x > -scale[0] && objCamera.mPos.x < scale[0]) {
+                            objCamera.mPos.z += 1;
+                            objCamera.mView.z += 1;
+
+                        }
                     }
                 }
                 break;
             case 'w':
             case 'W':
-                if (objCamera.mPos.x > scale[0] || objCamera.mPos.x<(-scale[0]) ||
-                    objCamera.mPos.z>scale[2] || objCamera.mPos.z < (-scale[2])) {
-                    printf("\nCoordenadas de cámara: %f,%f", objCamera.mPos.x, objCamera.mPos.z);
-                    printf("\nMáximos XZ: ( %f,%f )\n", scale[0], scale[2]);
-                    printf("\nMinimos XZ: ( %f,%f )\n", -scale[0], -scale[2]);
-                    outside = true;
+                if (vistaAerea==true) {
+                    if (auxKey[SDL_SCANCODE_RSHIFT] || auxKey[SDL_SCANCODE_LSHIFT])
+                        freeCamera.UpDown_Camera(CAMERASPEED + 0.1);
+                    else
+                        freeCamera.Move_Camera(CAMERASPEED + 0.1);
                 }
                 else {
-                    outside = false;
-                    if (auxKey[SDL_SCANCODE_RSHIFT] || auxKey[SDL_SCANCODE_LSHIFT])
-                        objCamera.UpDown_Camera(CAMERASPEED + 0.1);
-                    else
+                    if (objCamera.mPos.x > scale[0] || objCamera.mPos.x<(-scale[0]) ||
+                        objCamera.mPos.z>scale[2] || objCamera.mPos.z < (-scale[2])) {
+                        printf("\nCoordenadas de cámara: %f,%f", objCamera.mPos.x, objCamera.mPos.z);
+                        printf("\nMáximos XZ: ( %f,%f )\n", scale[0], scale[2]);
+                        printf("\nMinimos XZ: ( %f,%f )\n", -scale[0], -scale[2]);
+                        outside = true;
+                    }
+                    else {
+                        outside = false;
                         objCamera.Move_Camera(CAMERASPEED + 0.1);
-                }
-                if (outside == true) {
-                    if (objCamera.mPos.x > scale[0] && objCamera.mPos.z<scale[2] && objCamera.mPos.z >(-scale[2])) {
-                        objCamera.mPos.x -= 1;
-                        objCamera.mView.x -= 1;
+                        //Si estamos sobre el plano inclinado
+                        if (objCamera.mPos.x >= 0) {
+                            //Calculamos el valor de y acorde a la ecuación de la recta y la pendiente obtenida
+                            objCamera.mPos.y = objCamera.mPos.x * m;
+                            objCamera.mView.y = (objCamera.mPos.x + 10) * m;
+                        }
+                        else {
+                            objCamera.mPos.y = 2.5;
+                            objCamera.mView.y = (objCamera.mPos.x + 10) * (2.5 / scale[0]);
+                        }
                     }
-                    else if (objCamera.mPos.x < (-scale[0]) && objCamera.mPos.z<scale[2] && objCamera.mPos.z >(-scale[2])) {
-                        objCamera.mPos.x += 1;
-                        objCamera.mView.x += 1;
+                    if (outside == true) {
+                        if (objCamera.mPos.x > scale[0] && objCamera.mPos.z<scale[2] && objCamera.mPos.z >(-scale[2])) {
+                            objCamera.mPos.x -= 1;
+                            objCamera.mView.x -= 1;
+                        }
+                        else if (objCamera.mPos.x < (-scale[0]) && objCamera.mPos.z<scale[2] && objCamera.mPos.z >(-scale[2])) {
+                            objCamera.mPos.x += 1;
+                            objCamera.mView.x += 1;
 
-                    }
-                    else if (objCamera.mPos.z > scale[2] && objCamera.mPos.x > -scale[0] && objCamera.mPos.x < scale[0]) {
-                        objCamera.mPos.z -= 1;
-                        objCamera.mView.z -= 1;
+                        }
+                        else if (objCamera.mPos.z > scale[2] && objCamera.mPos.x > -scale[0] && objCamera.mPos.x < scale[0]) {
+                            objCamera.mPos.z -= 1;
+                            objCamera.mView.z -= 1;
 
-                    }
-                    else if (objCamera.mPos.z < (-scale[2]) && objCamera.mPos.x > -scale[0] && objCamera.mPos.x < scale[0]) {
-                        objCamera.mPos.z += 1;
-                        objCamera.mView.z += 1;
+                        }
+                        else if (objCamera.mPos.z < (-scale[2]) && objCamera.mPos.x > -scale[0] && objCamera.mPos.x < scale[0]) {
+                            objCamera.mPos.z += 1;
+                            objCamera.mView.z += 1;
 
+                        }
                     }
                 }
                 break;
             case 's':
             case 'S':
-                if (objCamera.mPos.x > scale[0] || objCamera.mPos.x<(-scale[0]) ||
-                    objCamera.mPos.z>scale[2] || objCamera.mPos.z < (-scale[2])) {
-                    printf("\nCoordenadas de cámara: %f,%f", objCamera.mPos.x, objCamera.mPos.z);
-                    printf("\nMáximos XZ: ( %f,%f )\n", scale[0], scale[2]);
-                    printf("\nMinimos XZ: ( %f,%f )\n", -scale[0], -scale[2]);
-                    outside = true;
+                if (vistaAerea == true) {
+                    if (auxKey[SDL_SCANCODE_RSHIFT] || auxKey[SDL_SCANCODE_LSHIFT])
+                        freeCamera.UpDown_Camera(-(CAMERASPEED + 0.1));
+                    else
+                        freeCamera.Move_Camera(-(CAMERASPEED + 0.1));
                 }
                 else {
-                    outside = false;
-                    if (auxKey[SDL_SCANCODE_RSHIFT] || auxKey[SDL_SCANCODE_LSHIFT])
-                        objCamera.UpDown_Camera(-(CAMERASPEED + 0.1));
-                    else
+                    if (objCamera.mPos.x > scale[0] || objCamera.mPos.x<(-scale[0]) ||
+                        objCamera.mPos.z>scale[2] || objCamera.mPos.z < (-scale[2])) {
+                        printf("\nCoordenadas de cámara: %f,%f", objCamera.mPos.x, objCamera.mPos.z);
+                        printf("\nMáximos XZ: ( %f,%f )\n", scale[0], scale[2]);
+                        printf("\nMinimos XZ: ( %f,%f )\n", -scale[0], -scale[2]);
+                        outside = true;
+                    }
+                    else {
+                        outside = false;
+                        //if (auxKey[SDL_SCANCODE_RSHIFT] || auxKey[SDL_SCANCODE_LSHIFT])
+                        //    objCamera.UpDown_Camera(-(CAMERASPEED + 0.1));
+                        //else
                         objCamera.Move_Camera(-(CAMERASPEED + 0.1));
-                }
-
-                if (outside == true) {
-                    if (objCamera.mPos.x > scale[0] && objCamera.mPos.z<scale[2] && objCamera.mPos.z >(-scale[2])) {
-                        objCamera.mPos.x -= 1;
-                        objCamera.mView.x -= 1;
+                        //Si estamos sobre el plano inclinado
+                        if (objCamera.mPos.x >= 0) {
+                            //Calculamos el valor de y acorde a la ecuación de la recta y la pendiente obtenida
+                            objCamera.mPos.y = objCamera.mPos.x * m;
+                            objCamera.mView.y = (objCamera.mPos.x + 10) * m;
+                        }
+                        else {
+                            objCamera.mPos.y = 2.5;
+                            objCamera.mView.y = (objCamera.mPos.x + 10) * (2.5 / scale[0]);
+                        }
                     }
-                    else if (objCamera.mPos.x < (-scale[0]) && objCamera.mPos.z<scale[2] && objCamera.mPos.z >(-scale[2])) {
-                        objCamera.mPos.x += 1;
-                        objCamera.mView.x += 1;
 
-                    }
-                    else if (objCamera.mPos.z > scale[2] && objCamera.mPos.x > -scale[0] && objCamera.mPos.x < scale[0]) {
-                        objCamera.mPos.z -= 1;
-                        objCamera.mView.z -= 1;
+                    if (outside == true) {
+                        if (objCamera.mPos.x > scale[0] && objCamera.mPos.z<scale[2] && objCamera.mPos.z >(-scale[2])) {
+                            objCamera.mPos.x -= 1;
+                            objCamera.mView.x -= 1;
+                        }
+                        else if (objCamera.mPos.x < (-scale[0]) && objCamera.mPos.z<scale[2] && objCamera.mPos.z >(-scale[2])) {
+                            objCamera.mPos.x += 1;
+                            objCamera.mView.x += 1;
 
-                    }
-                    else if (objCamera.mPos.z < (-scale[2]) && objCamera.mPos.x > -scale[0] && objCamera.mPos.x < scale[0]) {
-                        objCamera.mPos.z += 1;
-                        objCamera.mView.z += 1;
+                        }
+                        else if (objCamera.mPos.z > scale[2] && objCamera.mPos.x > -scale[0] && objCamera.mPos.x < scale[0]) {
+                            objCamera.mPos.z -= 1;
+                            objCamera.mView.z -= 1;
 
+                        }
+                        else if (objCamera.mPos.z < (-scale[2]) && objCamera.mPos.x > -scale[0] && objCamera.mPos.x < scale[0]) {
+                            objCamera.mPos.z += 1;
+                            objCamera.mView.z += 1;
+
+                        }
                     }
                 }
                 break;
             //Manejo de teclas especiales como su valor en ASCII (opcional, SDL ya cuenta con constantes)
-            case 32:
+            case 'f':
+            case 'F':
+                vistaAerea ^= true;
                 break;
             case 27:        // Cuando Esc es presionado...
                 exit(0);   // Salimos del programa
@@ -605,6 +699,9 @@ int main(int argc, char **argv)
 
     cargaModelos();
     terreno.generateMesh(100,100);
+    //El plano inclinado esta sobre el eje X, calculamos el valor de la pendiente del plano.
+    m=terreno.getHeight()/scale[0];
+    printf("\nPendiente igual a: %lf",m);
 
     sdlMainLoop();
 

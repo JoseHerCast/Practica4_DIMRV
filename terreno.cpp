@@ -26,6 +26,7 @@ void Terrain::generateMesh(GLuint width,GLuint depth)
         if (i > depth/2)
             inc++;
     }
+    this->maxHeight = inc;
     printf("\nNúmero de vertices %d\n",vertices.size());
 
     for (i = 0; i < depth - 1;i++) {
@@ -131,11 +132,7 @@ void Terrain::wireDraw()
     }
     glEnd();
 }
-GLfloat Terrain::getHeight(GLfloat x, GLfloat z) {
-    for (int i = 0; i < depth;i++) {
-        for (int j = 0; j < width; j++) {
+GLfloat Terrain::getHeight() {
 
-        }
-    }
-    return 0;
+    return this->maxHeight;
 }
